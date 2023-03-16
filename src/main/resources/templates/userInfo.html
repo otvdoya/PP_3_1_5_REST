@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Spring Security Example</title>
+    <link rel="stylesheet" th:href="style.css">
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Имя</th>
+                <th>Email</th>
+                <th>Возраст</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td th:text="${user.getId()}">Id</td>
+                <td th:text="${user.getUsername()}">Username</td>
+                <td th:text="${user.getEmail()}">Email</td>
+                <td th:text="${user.getAge()}">Age</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form th:method="GET" th:action="@{/logout}">
+        <input type="submit" value="Выйти">
+    </form>
+
+</body>
+</html>
