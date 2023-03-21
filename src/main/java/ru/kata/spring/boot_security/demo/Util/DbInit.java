@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
-import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
@@ -37,6 +36,8 @@ public class DbInit {
         rolesUser.add(roleService.getById(2L));
 
         Set<Role> rolesUserAndAdmin = new HashSet<>();
+        rolesUserAndAdmin.add(roleService.getById(1L));
+        rolesUserAndAdmin.add(roleService.getById(2L));
 
         User simple = new User("user", "user", "@user.ru", 25, rolesUser);
         User admin = new User("admin", "admin", "@admin.ru", 28, rolesAdmin);
@@ -44,7 +45,7 @@ public class DbInit {
 
         userService.addUser(simple);
         userService.addUser(admin);
-//        userService.addUser(adminUser);
+        userService.addUser(adminUser);
     }
 
 }

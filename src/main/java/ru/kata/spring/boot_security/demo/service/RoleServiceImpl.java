@@ -6,7 +6,7 @@ import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 @Service
 public class RoleServiceImpl {
 
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
     public RoleServiceImpl(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
