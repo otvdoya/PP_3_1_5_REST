@@ -8,6 +8,7 @@ import ru.kata.spring.boot_security.demo.models.User;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -41,7 +42,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserByUsername(String username) {
+    public Optional<User> findUserByUsername(String username) {
         return userRepository.findUserByUsername(username);
     }
 
