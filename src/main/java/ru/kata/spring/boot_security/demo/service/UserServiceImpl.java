@@ -20,9 +20,7 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(UserRepository userDao, PasswordEncoder passwordEncoder) {
         this.userRepository = userDao;
         this.passwordEncoder = passwordEncoder;
-        System.out.println("UserService");
     }
-
 
     @Override
     public List<User> getAllUsers() {

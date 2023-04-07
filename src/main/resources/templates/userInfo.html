@@ -1,32 +1,84 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
-    <title>Spring Security Example</title>
-    <link rel="stylesheet" th:href="style.css">
+    <meta charset="UTF-8">
+
+    <title>Список пользователей</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </head>
 <body>
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Имя</th>
-                <th>Email</th>
-                <th>Возраст</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td th:text="${user.getId()}">Id</td>
-                <td th:text="${user.getUsername()}">Username</td>
-                <td th:text="${user.getEmail()}">Email</td>
-                <td th:text="${user.getAge()}">Age</td>
-            </tr>
-        </tbody>
-    </table>
-    <br>
-    <form th:method="GET" th:action="@{/logout}">
-        <input type="submit" value="Выйти">
-    </form>
 
-</body>
-</html>
+<!--Шапка сверху-->
+<nav class="navbar navbar-dark bg-dark text-white">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-mx-auto">
+               <span class="navbar-brand h5">
+                  <th:block th:text="${thisUser.getUsername()}"></th:block>
+               </span>
+                <span class="navbar-brand">
+                   with roles:
+                   <span>
+                       <th:block th:each="role: ${thisUser.getRoles()}" th:text="${role.toString()} + ' '"></th:block>
+                   </span>
+               </span>
+            </div>
+        </div>
+        <div class="coll-1 text-white">
+            <a class="btn-link text-secondary" type="submit" href="/logout">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-flex align-items-start">
+            <!--Синие вкладки слева-->
+            <div class="col-2 nav flex-column nav-pills m-0 p-0 me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">User</a>
+            </div>
+            <!--Синяя вкладка админ-->
+            <div class="col-10 tab-content vh-100 bg-light" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                    <div class="container m-3 flex-column">
+                        <div class="container h1 p-1">
+                            User information-page
+                        </div>
+                        <div class="card">
+                            <div class="card-header h5">
+                                About user
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped border-top">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>First name</th>
+                                        <th>Second name</th>
+                                        <th>Age</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td th:text="${thisUser.getId()}"></td>
+                                        <td th:text="${thisUser.getFirstName()}">Id</td>
+                                        <td th:text="${thisUser.getSecondName}">Username</td>
+                                        <td th:text="${thisUser.getAge()}">Age</td>
+                                        <td th:text="${thisUser.getUsername()}">Email</td>
+                                        <td>
+                                            <th:block th:each="role: ${thisUser.getRoles()}" th:text="${role.toString()} + ' '"></th:block>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

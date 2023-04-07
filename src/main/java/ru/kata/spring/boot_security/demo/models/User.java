@@ -25,33 +25,38 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "username")
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "second_name")
+    private String secondName;
+
+    @Column(name = "age")
+    private Integer age;
+
+    @Column(name = "email")
     private String username;
 
     @Column(name = "password")
     private String password;
 
-    @Column(name = "email")
-    private String email;
-
-    @Column(name = "age")
-    private Integer age;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id"))
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
+//    private String rolesString;
 
     public User() {
     }
 
-    public User(String username, String password, String email, Integer age, Set<Role> roles) {
+    public User(String username,  String password, String firstName, String secondName, Integer age, Set<Role> roles) {
         this.username = username;
-        this.password = password;
-        this.email = email;
+        this.firstName = firstName;
+        this.secondName = secondName;
         this.age = age;
+        this.password = password;
         this.roles = roles;
     }
 
@@ -106,14 +111,6 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public Integer getAge() {
         return age;
     }
@@ -126,6 +123,14 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
     public Set<Role> getRoles() {
         return roles;
     }
@@ -134,12 +139,11 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                "roles=" + roles +
-                '}';
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 }

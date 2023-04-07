@@ -39,9 +39,9 @@ public class DbInit {
         rolesUserAndAdmin.add(roleService.getById(1L));
         rolesUserAndAdmin.add(roleService.getById(2L));
 
-        User simple = new User("user", "user", "@user.ru", 25, rolesUser);
-        User admin = new User("admin", "admin", "@admin.ru", 28, rolesAdmin);
-        User adminUser = new User("admin_user", "admin_user", "@adminuser.ru", 21, rolesUserAndAdmin);
+        User simple = new User("user@mail.ru", "user", "user", "user", 25, rolesUser);
+        User admin = new User("admin@mail.ru", "admin", "admin", "admin", 28, rolesAdmin);
+        User adminUser = new User("adminuser@mail.ru", "admin_user", "admin_user", "admin_user", 21,  rolesUserAndAdmin);
 
         userService.addUser(simple);
         userService.addUser(admin);

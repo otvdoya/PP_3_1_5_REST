@@ -14,6 +14,8 @@ import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import java.security.Principal;
+
 
 @Controller
 @RequestMapping("/admin")
@@ -29,29 +31,19 @@ public class AdminController {
     }
 
     @GetMapping("")
-    public String allUsers(Model model) {
+    public String allUsers(Model model, Principal principal) {
+        model.addAttribute("thisUser", userService.findUserByUsername(principal.getName()).orElse(null));
         model.addAttribute("users", userService.getAllUsers());
-        return "usersList";
-    }
-
-    @GetMapping("edit/{id}")
-    public String editUser(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", userService.getUserById(id));
         model.addAttribute("roles", roleService.findAll());
-        return "editUser";
+        model.addAttribute("newUser", new User());
+        return "usersList";
     }
 
     @PatchMapping("edit/{id}")
     public String editUser(@ModelAttribute("user") User user) {
+        System.out.println(user);
         userService.editUser(user);
         return "redirect:/admin";
-    }
-
-    @GetMapping("/add")
-    public String addNewUser(Model model) {
-        model.addAttribute("user", new User());
-        model.addAttribute("roles", roleService.findAll());
-        return "addUser";
     }
 
     @PostMapping("/add")
