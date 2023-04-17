@@ -1,0 +1,3 @@
+function closeEditModal() {
+    modalEdit.hide();
+}
