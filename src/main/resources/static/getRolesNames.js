@@ -33,6 +33,8 @@ function selectOptionRoles(form, user) {
     for (let i = 0; i < form.roles.options.length; i++) {
         if (roles.includes(form.roles.options[i].text)) {
             form.roles.options[i].selected = true;
+        } else {
+            form.roles.options[i].selected = false;
         }
     }
 
